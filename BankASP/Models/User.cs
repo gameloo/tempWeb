@@ -5,19 +5,19 @@ using System.Threading.Tasks;
 
 namespace BankASP.Models
 {
-    public class Group
+    public class User
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public double MinValue { get; set; }
-        public double MaxValue { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string DateOfBirthday { get; set; }
+        public int? GroupId { get; set; }
+        public Group Group { get; set; }
         public virtual ICollection<History> Histories { get; set; }
-        public virtual ICollection<User> Users { get; set; }
 
-        public Group()
+        public User()
         {
             Histories = new List<History>();
-            Users = new List<User>();
         }
     }
 }

@@ -11,5 +11,7 @@ namespace BankASP.Models
         public ApplicationContext(DbContextOptions<ApplicationContext> options): base(options) { }
 
         public DbSet<Group> Groups { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<History> Histories { get; set; }
     }
 }

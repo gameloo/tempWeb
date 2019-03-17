@@ -1,1 +1,78 @@
-﻿<h1>Client Page</h1>
+﻿<h1>Список пользователей</h1>
+<input type="button" value="Добавить" class="btn btn-default" (click)="add()" />
+<table *ngIf="tableMode; else create" class="table table-striped">
+    <thead>
+        <tr>
+            <td>Имя</td>
+            <td>Фамилия</td>
+            <td>Дата рождения</td>
+            <td>Группа риска</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of users">
+            <ng-template [ngIf]="user?.id != p.id" [ngIfElse]="edit">
+                <td>{{p?.firstName}}</td>
+                <td>{{p?.lastName}}</td>
+                <td>{{p?.dateOfBirthday}}</td>
+                <td>{{p?.groupId}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary">Подробнее</button>
+                    <button class="btn btn-sm btn-primary" (click)="editGroup(p)">Изменить</button>
+                    <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
+                </td>
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
+
+<!--шаблон для редактирования-->
+<ng-template #edit>
+    <td>
+        <input type="text" [(ngModel)]="user.firstName" class="form-control" name="input_name" #input_name="ngModel" required />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="user.lastName" class="form-control" name="input_min_value" #input_min_value="ngModel" pattern="(^\d+[.]{1}\d+$)|(^\d+$)" required />
+    </td>
+    <td>
+        <input type="number" [(ngModel)]="user.dob" class="form-control" name="input_min_value" #input_min_value="ngModel" pattern="(^\d+[.]{1}\d+$)|(^\d+$)" required />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
+    </td>
+</ng-template>
+
+<!--шаблон для добавления-->
+<ng-template #create>
+    <div class="form-group">
+        <label>Имя</label>
+        <input type="text" [(ngModel)]="user.firstName" class="form-control" [ngModelOptions]="{standalone: true}" name="input_firstName" #input_firstName="ngModel" required />
+    </div>
+    <div class="form-group">
+        <label>Фамилия</label>
+        <input type="text" [(ngModel)]="user.lastName" class="form-control" [ngModelOptions]="{standalone: true}" name="input_lastName" #input_lastName="ngModel" required />
+    </div>
+    <input type="date" class="form-group"
+           [(ngModel)]="user.dateOfBirthday"
+           value="{{dateOfBirthday | date:MM/dd/yyyy}}"
+           validatedateformat
+           data-date-format="mm/dd/yyyy"
+           calendar
+           maxdate="todays" />
+
+    <label for="group">Группа риска</label>
+    <select class="form-control" id="group"
+            required [(ngModel)]="user.groupId"
+            #power="ngModel">
+        <option *ngFor="let group of groups" [value]="group.id">{{group.name}}</option>
+    </select>
+
+
+    <div class="form-group">
+        <input type="button" (click)="save()" value="Сохранить" class="btn btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </div>
+
+</ng-template>

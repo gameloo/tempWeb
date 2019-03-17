@@ -14,7 +14,7 @@ var DataService = /** @class */ (function () {
         this.http = http;
         this.groupUrl = "/api/groups";
         this.userUrl = "/api/users";
-        this.historyUrl = "/api/historys";
+        this.historyUrl = "/api/history";
     }
     DataService.prototype.getGroups = function () {
         return this.http.get(this.groupUrl);
@@ -23,22 +23,25 @@ var DataService = /** @class */ (function () {
         return this.http.post(this.groupUrl, group);
     };
     DataService.prototype.updateGroup = function (group) {
-        return this.http.put(this.groupUrl + '/' + group.id, group);
+        return this.http.put(this.groupUrl + "/" + group.id, group);
     };
     DataService.prototype.deleteGroup = function (id) {
-        return this.http.delete(this.groupUrl + '/' + id);
+        return this.http.delete(this.groupUrl + "/" + id);
     };
     DataService.prototype.getUsers = function () {
+        return this.http.get(this.userUrl);
     };
-    DataService.prototype.createUser = function () {
+    DataService.prototype.createUser = function (user) {
+        return this.http.post(this.userUrl, user);
     };
-    DataService.prototype.updateUser = function () {
+    DataService.prototype.updateUser = function (user) {
+        return this.http.put(this.userUrl + "/" + user.id, user);
     };
-    DataService.prototype.deleteUser = function () {
+    DataService.prototype.deleteUser = function (id) {
+        return this.http.delete(this.userUrl + "/" + id);
     };
-    DataService.prototype.getHistory = function () {
-    };
-    DataService.prototype.createHistory = function () {
+    DataService.prototype.getHistory = function (id_user) {
+        return this.http.get(this.historyUrl + "/" + id_user);
     };
     DataService = __decorate([
         Injectable(),

@@ -1,10 +1,10 @@
 var User = /** @class */ (function () {
-    function User(id, firstName, lastName, dob, group) {
+    function User(id, firstName, lastName, dateOfBirthday, groupId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dob = dob;
-        this.group = group;
+        this.dateOfBirthday = dateOfBirthday;
+        this.groupId = groupId;
     }
     return User;
 }());

@@ -5,7 +5,7 @@ export class User {
         public id?: number,
         public firstName?: string,
         public lastName?: string,
-        public dob?: number,
-        public group?: Group
+        public dateOfBirthday?: string,
+        public groupId?: number
     ) { }
 }

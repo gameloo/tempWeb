@@ -1,1 +1,1 @@
-{"version":3,"file":"history.js","sourceRoot":"","sources":["history.ts"],"names":[],"mappings":"AAEA;IACI,cACW,EAAW,EACX,IAAa,EACb,KAAa;QAFb,OAAE,GAAF,EAAE,CAAS;QACX,SAAI,GAAJ,IAAI,CAAS;QACb,UAAK,GAAL,KAAK,CAAQ;IACpB,CAAC;IACT,WAAC;AAAD,CAAC,AAND,IAMC"}
+{"version":3,"file":"history.js","sourceRoot":"","sources":["history.ts"],"names":[],"mappings":"AAGA;IACI,iBACW,EAAW,EACX,IAAa,EACb,KAAa,EACb,IAAW;QAHX,OAAE,GAAF,EAAE,CAAS;QACX,SAAI,GAAJ,IAAI,CAAS;QACb,UAAK,GAAL,KAAK,CAAQ;QACb,SAAI,GAAJ,IAAI,CAAO;IAClB,CAAC;IACT,cAAC;AAAD,CAAC,AAPD,IAOC"}
