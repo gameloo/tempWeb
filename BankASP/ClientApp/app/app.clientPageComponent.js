@@ -10,23 +10,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { DataService } from './data.service';
 import { User } from './models/user';
-import { Group } from './models/group';
 var AppClientPageComponent = /** @class */ (function () {
     function AppClientPageComponent(dataService) {
         this.dataService = dataService;
         this.user = new User();
-        this.group = new Group();
         this.tableMode = true; // табличный режим
     }
     AppClientPageComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.dataService.getGroups().subscribe(function (data) { return _this.groups = data; });
+        //this.dataService.getGroups().subscribe((data: Group[]) => this.groups = data);
         this.loadUsers(); // загрузка данных при старте компонента  
     };
     AppClientPageComponent.prototype.loadUsers = function () {
         var _this = this;
         this.dataService.getUsers()
             .subscribe(function (data) { return _this.users = data; });
+    };
+    AppClientPageComponent.prototype.getGroupName = function (id) {
+        var _this = this;
+        if (this.groups == null) {
+            this.dataService.getGroups().subscribe(function (data) {
+                _this.groups = data;
+                return _this.groups.find(function (data) { return data.id == id; }).name;
+            });
+        }
+        else
+            return this.groups.find(function (data) { return data.id == id; }).name;
     };
     AppClientPageComponent.prototype.save = function () {
         var _this = this;
@@ -44,7 +52,6 @@ var AppClientPageComponent = /** @class */ (function () {
         this.user = p;
     };
     AppClientPageComponent.prototype.cancel = function () {
-        this.group = new Group();
         this.user = new User();
         this.tableMode = true;
     };

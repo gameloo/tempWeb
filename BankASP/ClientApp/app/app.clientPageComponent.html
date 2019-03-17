@@ -16,10 +16,10 @@
                 <td>{{p?.firstName}}</td>
                 <td>{{p?.lastName}}</td>
                 <td>{{p?.dateOfBirthday}}</td>
-                <td>{{p?.groupId}}</td>
+                <td>{{getGroupName(p?.groupId)}}</td>
                 <td>
                     <button class="btn btn-sm btn-primary">Подробнее</button>
-                    <button class="btn btn-sm btn-primary" (click)="editGroup(p)">Изменить</button>
+                    <button class="btn btn-sm btn-primary" (click)="editUser(p)">Изменить</button>
                     <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
                 </td>
             </ng-template>
@@ -33,11 +33,25 @@
         <input type="text" [(ngModel)]="user.firstName" class="form-control" name="input_name" #input_name="ngModel" required />
     </td>
     <td>
-        <input type="text" [(ngModel)]="user.lastName" class="form-control" name="input_min_value" #input_min_value="ngModel" pattern="(^\d+[.]{1}\d+$)|(^\d+$)" required />
+        <input type="text" [(ngModel)]="user.lastName" class="form-control" name="input_min_value" #input_min_value="ngModel" required/>
     </td>
     <td>
-        <input type="number" [(ngModel)]="user.dob" class="form-control" name="input_min_value" #input_min_value="ngModel" pattern="(^\d+[.]{1}\d+$)|(^\d+$)" required />
+        <input type="date" class="form-group"
+               [(ngModel)]="user.dateOfBirthday"
+               value="{{dateOfBirthday | date:MM/dd/yyyy}}"
+               validatedateformat
+               data-date-format="mm/dd/yyyy"
+               calendar
+               maxdate="todays" />
     </td>
+    <td>
+        <select class="form-control" id="group"
+                required [(ngModel)]="user.groupId"
+                #power="ngModel">
+            <option *ngFor="let group of groups" [value]="group.id">{{group?.name}}</option>
+        </select>
+    </td>
+
     <td>
         <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
         <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />

@@ -13,20 +13,29 @@ export class AppClientPageComponent implements OnInit {
 
     user: User = new User();
     users: User[];
-    group: Group = new Group();
     groups: Group[];
     tableMode: boolean = true;          // табличный режим
 
     constructor(private dataService: DataService) { }
 
     ngOnInit() {
-        this.dataService.getGroups().subscribe((data: Group[]) => this.groups = data);
+        //this.dataService.getGroups().subscribe((data: Group[]) => this.groups = data);
         this.loadUsers();    // загрузка данных при старте компонента  
     }
 
     loadUsers() {
         this.dataService.getUsers()
             .subscribe((data: User[]) => this.users = data);
+    }
+
+    getGroupName(id: number) {
+        if (this.groups == null) {
+            this.dataService.getGroups().subscribe((data: Group[]) => {
+                this.groups = data;
+                return this.groups.find((data: Group) => data.id == id).name;
+            });
+        }
+        else return this.groups.find((data: Group) => data.id == id).name;
     }
 
     save() {
@@ -45,7 +54,6 @@ export class AppClientPageComponent implements OnInit {
     }
 
     cancel() {
-        this.group = new Group();
         this.user = new User();
         this.tableMode = true;
     }
