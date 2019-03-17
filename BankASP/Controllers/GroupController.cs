@@ -17,7 +17,7 @@ namespace BankASP.Controllers
             db = context;
             if (!db.Groups.Any())
             {
-                db.Groups.Add(new Group { Name = "Test 1", MinValue = 0, MaxValue = 1 });
+                db.Groups.Add(new Group { Name = "Test 1", MinValue = 0, MaxValue = 1, IsHide = false });
                 db.SaveChanges();
             }
         }
@@ -25,7 +25,7 @@ namespace BankASP.Controllers
         [HttpGet]
         public IEnumerable<Group> Get()
         {
-            return db.Groups.ToList();
+            return db.Groups.Where(i => !i.IsHide).ToList();
         }
 
         [HttpGet("{id}")]
@@ -64,10 +64,16 @@ namespace BankASP.Controllers
             Group group = db.Groups.FirstOrDefault(x => x.Id == id);
             if (group != null)
             {
-                db.Groups.Remove(group);
+                if (db.Histories.FirstOrDefault(x => x.GroupId == id) == null)
+                    db.Remove(group);
+                else
+                {
+                    group.IsHide = true;
+                    db.Update(group);
+                }
                 db.SaveChanges();
             }
-            return Ok(group);
+            return Ok();
         }
     }
 

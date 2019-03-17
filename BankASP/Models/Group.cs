@@ -7,6 +7,7 @@ namespace BankASP.Models
 {
     public class Group
     {
+        public bool IsHide { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public double MinValue { get; set; }

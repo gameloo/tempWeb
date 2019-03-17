@@ -17,7 +17,7 @@ namespace BankASP.Controllers
             db = context;
             if (!db.Users.Any())
             {
-                db.Users.Add(new User { FirstName = "Test_First_Name", LastName = "Test_Last_Name", DateOfBirthday = "Test_01_01_2001" });
+                db.Users.Add(new User { FirstName = "Test_First_Name", LastName = "Test_Last_Name", DateOfBirthday = "Test_01_01_2001"});
                 db.SaveChanges();
             }
         }
@@ -39,7 +39,8 @@ namespace BankASP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
+                var _user = db.Users.Add(user);
+                db.Histories.Add(new History() { GroupId = _user.Entity.GroupId, UserId = _user.Entity.Id, Date = DateTime.Now.ToString("MM/dd/yyyy HH:mm") });
                 db.SaveChanges();
                 return Ok(ModelState);
             }
@@ -51,7 +52,8 @@ namespace BankASP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Update(user);
+                var _user = db.Update(user);
+                db.Histories.Add(new History() { GroupId = _user.Entity.GroupId, UserId = _user.Entity.Id, Date = DateTime.Now.ToString("MM/dd/yyyy HH:mm") });
                 db.SaveChanges();
                 return Ok(ModelState);
             }
@@ -64,6 +66,10 @@ namespace BankASP.Controllers
             User user = db.Users.FirstOrDefault(x => x.Id == id);
             if (user != null)
             {
+                var allHistoryOfUser = db.Histories.Where(i => i.UserId == id);
+                foreach(var item in allHistoryOfUser)
+                    db.Remove(item);
+                db.SaveChanges();
                 db.Users.Remove(user);
                 db.SaveChanges();
             }

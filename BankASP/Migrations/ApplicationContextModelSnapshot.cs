@@ -25,6 +25,8 @@ namespace BankASP.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("IsHide");
+
                     b.Property<double>("MaxValue");
 
                     b.Property<double>("MinValue");

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankASP.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20190317153529_Initial")]
-    partial class Initial
+    [Migration("20190317211505_Inital")]
+    partial class Inital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,6 +26,8 @@ namespace BankASP.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsHide");
 
                     b.Property<double>("MaxValue");
 
