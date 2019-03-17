@@ -5,16 +5,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { Component } from '@angular/core';
-var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+import { DataService } from './data.service';
+var AppClientPageComponent = /** @class */ (function () {
+    function AppClientPageComponent() {
     }
-    AppComponent = __decorate([
+    AppClientPageComponent = __decorate([
         Component({
             selector: 'app',
-            templateUrl: './app.component.html'
+            templateUrl: './app.clientPageComponent.html',
+            providers: [DataService]
         })
-    ], AppComponent);
-    return AppComponent;
+    ], AppClientPageComponent);
+    return AppClientPageComponent;
 }());
-export { AppComponent };
-//# sourceMappingURL=app.component.js.map
+export { AppClientPageComponent };
+//# sourceMappingURL=app.clientPageComponent.js.map

@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Group } from './group';
+import { Group } from './models/group';
 
 @Injectable()
 export class DataService {

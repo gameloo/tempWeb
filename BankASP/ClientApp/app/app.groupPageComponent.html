@@ -1,10 +1,62 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿<h1>Список групп риска</h1>
+<input type="button" value="Добавить" class="btn btn-default" (click)="add()" />
+<table *ngIf="tableMode; else create" class="table table-striped">
+    <thead>
+        <tr>
+            <td>Название группы</td>
+            <td>Нижний диапозон</td>
+            <td>Верхний диапозон</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of groups">
+            <ng-template [ngIf]="group?.id != p.id" [ngIfElse]="edit">
+                <td>{{p?.name}}</td>
+                <td>{{p?.minValue}}</td>
+                <td>{{p?.maxValue}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" (click)="editGroup(p)">Изменить</button>
+                    <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
+                </td>
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
 
-</body>
-</html>
+<!--шаблон для редактирования-->
+<ng-template #edit>
+    <td>
+        <input type="text" [(ngModel)]="group.name" class="form-control" name="input_name" #input_name="ngModel" required />
+    </td>
+    <td>
+        <input type="number" [(ngModel)]="group.minValue" class="form-control" name="input_min_value" #input_min_value="ngModel" pattern="(^\d+[.]{1}\d+$)|(^\d+$)" required />
+    </td>
+    <td>
+        <input type="number" [(ngModel)]="group.maxValue" class="form-control" name="input_max_value" #input_max_value="ngModel" pattern="(^\d+[.]{1}\d+$)|(^\d+$)" required />
+    </td>
+    <td>
+        <input type="button" [disabled]="input_name.invalid || input_min_value.invalid || input_max_value.invalid" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
+    </td>
+</ng-template>
+
+<!--шаблон для добавления-->
+<ng-template #create>
+    <div class="form-group">
+        <label>Название группы</label>
+        <input type="text" [(ngModel)]="group.name" class="form-control" [ngModelOptions]="{standalone: true}" name="input_name" #input_name="ngModel" required />
+    </div>
+    <div class="form-group">
+        <label>Нижний диапозон</label>
+        <input type="number" [(ngModel)]="group.minValue" class="form-control" [ngModelOptions]="{standalone: true}" name="input_min_value" #input_min_value="ngModel" pattern="(^\d+[.]{1}\d+$)|(^\d+$)" required />
+    </div>
+    <div class="form-group">
+        <label>Верхний диапозон</label>
+        <input type="number" [(ngModel)]="group.maxValue" class="form-control" [ngModelOptions]="{standalone: true}" name="input_max_value" #input_max_value="ngModel" pattern="(^\d+[.]{1}\d+$)|(^\d+$)" required />
+    </div>
+    <div class="form-group">
+        <input type="button" [disabled]="input_name.invalid || input_min_value.invalid || input_max_value.invalid" (click)="save()" value="Сохранить" class="btn btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </div>
+</ng-template>

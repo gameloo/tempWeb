@@ -12,6 +12,8 @@
     <None Remove="ClientApp\app\app.module.ts" />
     <None Remove="ClientApp\app\data.service.ts" />
     <None Remove="ClientApp\app\group.ts" />
+    <None Remove="ClientApp\app\models\history.ts" />
+    <None Remove="ClientApp\app\user.ts" />
     <None Remove="ClientApp\main.ts" />
     <None Remove="ClientApp\polyfills.ts" />
   </ItemGroup>
@@ -27,7 +29,9 @@
     <TypeScriptCompile Include="ClientApp\app\app.groupPageComponent.ts" />
     <TypeScriptCompile Include="ClientApp\app\app.module.ts" />
     <TypeScriptCompile Include="ClientApp\app\data.service.ts" />
-    <TypeScriptCompile Include="ClientApp\app\group.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\group.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\history.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\user.ts" />
     <TypeScriptCompile Include="ClientApp\main.ts" />
     <TypeScriptCompile Include="ClientApp\polyfills.ts" />
   </ItemGroup>

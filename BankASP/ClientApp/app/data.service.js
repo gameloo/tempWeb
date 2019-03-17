@@ -12,19 +12,33 @@ import { HttpClient } from '@angular/common/http';
 var DataService = /** @class */ (function () {
     function DataService(http) {
         this.http = http;
-        this.url = "/api/groups";
+        this.groupUrl = "/api/groups";
+        this.userUrl = "/api/users";
+        this.historyUrl = "/api/historys";
     }
     DataService.prototype.getGroups = function () {
-        return this.http.get(this.url);
+        return this.http.get(this.groupUrl);
     };
     DataService.prototype.createGroup = function (group) {
-        return this.http.post(this.url, group);
+        return this.http.post(this.groupUrl, group);
     };
     DataService.prototype.updateGroup = function (group) {
-        return this.http.put(this.url + '/' + group.id, group);
+        return this.http.put(this.groupUrl + '/' + group.id, group);
     };
     DataService.prototype.deleteGroup = function (id) {
-        return this.http.delete(this.url + '/' + id);
+        return this.http.delete(this.groupUrl + '/' + id);
+    };
+    DataService.prototype.getUsers = function () {
+    };
+    DataService.prototype.createUser = function () {
+    };
+    DataService.prototype.updateUser = function () {
+    };
+    DataService.prototype.deleteUser = function () {
+    };
+    DataService.prototype.getHistory = function () {
+    };
+    DataService.prototype.createHistory = function () {
     };
     DataService = __decorate([
         Injectable(),

@@ -4,5 +4,5 @@
         public name?: string,
         public minValue?: number,
         public maxValue?: number
-    ) {}
+    ) { }
 }
