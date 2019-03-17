@@ -30,10 +30,12 @@
 <!--шаблон для редактирования-->
 <ng-template #edit>
     <td>
-        <input type="text" [(ngModel)]="user.firstName" class="form-control" name="input_name" #input_name="ngModel" required />
+        <input type="text" [(ngModel)]="user.firstName" class="form-control"
+                name="input_firstName" #input_firstName="ngModel" required />
     </td>
     <td>
-        <input type="text" [(ngModel)]="user.lastName" class="form-control" name="input_min_value" #input_min_value="ngModel" required/>
+        <input type="text" [(ngModel)]="user.lastName" class="form-control"
+                name="input_lastName" #input_lastName="ngModel" required />
     </td>
     <td>
         <input type="date" class="form-group"
@@ -42,7 +44,9 @@
                validatedateformat
                data-date-format="mm/dd/yyyy"
                calendar
-               maxdate="todays" />
+               maxdate="todays"
+               name="input_dob"
+               #input_dob="ngModel" required/>
     </td>
     <td>
         <select class="form-control" id="group"
@@ -53,8 +57,12 @@
     </td>
 
     <td>
-        <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
-        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
+        <input type="button" [disabled]="input_firstName.invalid || input_lastName.invalid || input_dob.invalid"
+               value="Сохранить" (click)="save()"
+               class="btn btn-sm btn-success" />
+        <input type="button"
+               value="Отмена" (click)="cancel()"
+               class="btn btn-sm btn-warning" />
     </td>
 </ng-template>
 
@@ -62,31 +70,45 @@
 <ng-template #create>
     <div class="form-group">
         <label>Имя</label>
-        <input type="text" [(ngModel)]="user.firstName" class="form-control" [ngModelOptions]="{standalone: true}" name="input_firstName" #input_firstName="ngModel" required />
+        <input type="text" [(ngModel)]="user.firstName" class="form-control"
+               [ngModelOptions]="{standalone: true}"
+               name="input_firstName" #input_firstName="ngModel" required />
     </div>
     <div class="form-group">
         <label>Фамилия</label>
-        <input type="text" [(ngModel)]="user.lastName" class="form-control" [ngModelOptions]="{standalone: true}" name="input_lastName" #input_lastName="ngModel" required />
+        <input type="text" [(ngModel)]="user.lastName" class="form-control"
+               [ngModelOptions]="{standalone: true}"
+               name="input_lastName" #input_lastName="ngModel" required />
     </div>
-    <input type="date" class="form-group"
-           [(ngModel)]="user.dateOfBirthday"
-           value="{{dateOfBirthday | date:MM/dd/yyyy}}"
-           validatedateformat
-           data-date-format="mm/dd/yyyy"
-           calendar
-           maxdate="todays" />
-
-    <label for="group">Группа риска</label>
-    <select class="form-control" id="group"
-            required [(ngModel)]="user.groupId"
-            #power="ngModel">
-        <option *ngFor="let group of groups" [value]="group.id">{{group.name}}</option>
-    </select>
+    <div class="form-group">
+        <label>Дата рождения</label>
+        <input type="date" class="form-group"
+               [(ngModel)]="user.dateOfBirthday"
+               value="{{dateOfBirthday | date:MM/dd/yyyy}}"
+               validatedateformat
+               data-date-format="mm/dd/yyyy"
+               calendar
+               maxdate="todays"
+               name="input_dob"
+               #input_dob="ngModel" required/>
+    </div>
+    <div>
+        <label for="group">Группа риска</label>
+        <select class="form-control" id="group"
+                required [(ngModel)]="user.groupId"
+                #power="ngModel">
+            <option *ngFor="let group of groups" [value]="group.id">{{group.name}}</option>
+        </select>
+    </div>
 
 
     <div class="form-group">
-        <input type="button" (click)="save()" value="Сохранить" class="btn btn-success" />
-        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+        <input type="button" [disabled]="input_firstName.invalid || input_lastName.invalid || input_dob.invalid"
+               value="Сохранить" (click)="save()"
+               class="btn btn-success" />
+        <input type="button"
+               value="Отмена" (click)="cancel()"
+               class="btn btn-warning" />
     </div>
 
 </ng-template>

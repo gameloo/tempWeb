@@ -19,7 +19,6 @@ export class AppClientPageComponent implements OnInit {
     constructor(private dataService: DataService) { }
 
     ngOnInit() {
-        //this.dataService.getGroups().subscribe((data: Group[]) => this.groups = data);
         this.loadUsers();    // загрузка данных при старте компонента  
     }
 
@@ -32,10 +31,16 @@ export class AppClientPageComponent implements OnInit {
         if (this.groups == null) {
             this.dataService.getGroups().subscribe((data: Group[]) => {
                 this.groups = data;
-                return this.groups.find((data: Group) => data.id == id).name;
+                let tempGroup = this.groups.find((data: Group) => data.id == id);
+                if (tempGroup != undefined) return tempGroup.name;
+                else return "-";
             });
         }
-        else return this.groups.find((data: Group) => data.id == id).name;
+        else {
+            let tempGroup = this.groups.find((data: Group) => data.id == id);
+            if (tempGroup != undefined) return tempGroup.name;
+            else return "-";
+        }
     }
 
     save() {

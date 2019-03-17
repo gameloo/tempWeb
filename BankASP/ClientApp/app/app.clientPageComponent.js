@@ -17,7 +17,6 @@ var AppClientPageComponent = /** @class */ (function () {
         this.tableMode = true; // табличный режим
     }
     AppClientPageComponent.prototype.ngOnInit = function () {
-        //this.dataService.getGroups().subscribe((data: Group[]) => this.groups = data);
         this.loadUsers(); // загрузка данных при старте компонента  
     };
     AppClientPageComponent.prototype.loadUsers = function () {
@@ -30,11 +29,20 @@ var AppClientPageComponent = /** @class */ (function () {
         if (this.groups == null) {
             this.dataService.getGroups().subscribe(function (data) {
                 _this.groups = data;
-                return _this.groups.find(function (data) { return data.id == id; }).name;
+                var tempGroup = _this.groups.find(function (data) { return data.id == id; });
+                if (tempGroup != undefined)
+                    return tempGroup.name;
+                else
+                    return "-";
             });
         }
-        else
-            return this.groups.find(function (data) { return data.id == id; }).name;
+        else {
+            var tempGroup = this.groups.find(function (data) { return data.id == id; });
+            if (tempGroup != undefined)
+                return tempGroup.name;
+            else
+                return "-";
+        }
     };
     AppClientPageComponent.prototype.save = function () {
         var _this = this;
