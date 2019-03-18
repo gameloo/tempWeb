@@ -15,6 +15,7 @@ var AppClientInfoPageComponent = /** @class */ (function () {
         var _this = this;
         this.dataService = dataService;
         this.route = route;
+        this.isReady = false;
         this.routeSubscription = route.queryParams.subscribe(function (params) {
             _this.id = params['id'];
         });
@@ -24,17 +25,26 @@ var AppClientInfoPageComponent = /** @class */ (function () {
     };
     AppClientInfoPageComponent.prototype.loadHistory = function () {
         var _this = this;
-        this.dataService.getHistory(this.id).subscribe(function (data) {
-            return _this.histories = data;
+        this.dataService.getHistory(this.id)
+            .subscribe(function (data) {
+            _this.histories = data;
+            _this.isReady = true;
         });
     };
     AppClientInfoPageComponent.prototype.getGroupName = function (id) {
-        console.error(id);
-        this.dataService.getGroup(id).subscribe(function (data) { return data.name; });
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.dataService
+                .getGroup(id) //useful if you need the data once and don't want to manually cancel the subscription again
+                .subscribe(function (data) {
+                console.log(data.name);
+                resolve(data.name);
+            });
+        });
     };
     AppClientInfoPageComponent = __decorate([
         Component({
-            selector: 'app',
+            selector: 'app-info',
             templateUrl: './app.clientInfoPageComponent.html',
             providers: [DataService]
         }),

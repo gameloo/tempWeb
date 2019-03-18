@@ -8,10 +8,8 @@
     </thead>
     <tbody>
         <tr *ngFor="let p of histories">
-            <ng-template>
                 <td>{{p?.date}}</td>
                 <td>{{getGroupName(p?.groupId)}}</td>
-            </ng-template>
         </tr>
     </tbody>
 </table>
