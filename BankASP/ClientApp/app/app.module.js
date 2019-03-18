@@ -12,9 +12,11 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppClientPageComponent } from './app.clientPageComponent';
 import { AppGroupPageComponent } from './app.groupPageComponent';
+import { AppClientInfoPageComponent } from './app.clientInfoPageComponent';
 var appRoutes = [
     { path: '', component: AppClientPageComponent },
     { path: 'groups', component: AppGroupPageComponent },
+    { path: 'userInfo', component: AppClientInfoPageComponent },
     { path: '**', redirectTo: '/' }
 ];
 var AppModule = /** @class */ (function () {
@@ -23,7 +25,7 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         NgModule({
             imports: [BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes)],
-            declarations: [AppComponent, AppClientPageComponent, AppGroupPageComponent],
+            declarations: [AppComponent, AppClientPageComponent, AppGroupPageComponent, AppClientInfoPageComponent],
             bootstrap: [AppComponent]
         })
     ], AppModule);

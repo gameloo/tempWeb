@@ -18,7 +18,7 @@
                 <td>{{p?.dateOfBirthday}}</td>
                 <td>{{getGroupName(p?.groupId)}}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary">Подробнее</button>
+                    <button class="btn btn-sm btn-primary" (click)="navigateToClientInfoPage(p)">Подробнее</button>
                     <button class="btn btn-sm btn-primary" (click)="editUser(p)">Изменить</button>
                     <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
                 </td>

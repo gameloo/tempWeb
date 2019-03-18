@@ -17,6 +17,10 @@ export class DataService {
         return this.http.get(this.groupUrl);
     }
 
+    getGroup(id: number) {
+        return this.http.get(`${this.groupUrl}/${id}`);
+    }
+
     createGroup(group: Group) {
         return this.http.post(this.groupUrl, group);
     }

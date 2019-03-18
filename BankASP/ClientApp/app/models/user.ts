@@ -1,6 +1,4 @@
-﻿import { Group } from "./group";
-
-export class User {
+﻿export class User {
     constructor(
         public id?: number,
         public firstName?: string,

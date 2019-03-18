@@ -1,9 +1,9 @@
 var History = /** @class */ (function () {
-    function History(id, date, group, user) {
+    function History(id, date, groupId, userId) {
         this.id = id;
         this.date = date;
-        this.group = group;
-        this.user = user;
+        this.groupId = groupId;
+        this.userId = userId;
     }
     return History;
 }());

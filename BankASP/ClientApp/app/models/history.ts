@@ -1,11 +1,8 @@
-﻿import { Group } from "./group";
-import { User } from "./user";
-
-export class History {
+﻿export class History {
     constructor(
         public id?: number,
         public date?: number,
-        public group?: Group,
-        public user?: User
+        public groupId?: number,
+        public userId?: number
     ) { }
 }

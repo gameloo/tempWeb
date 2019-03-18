@@ -2,6 +2,7 @@
 import { DataService } from './data.service';
 import { User } from './models/user';
 import { Group } from './models/group';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app',
@@ -16,10 +17,19 @@ export class AppClientPageComponent implements OnInit {
     groups: Group[];
     tableMode: boolean = true;          // табличный режим
 
-    constructor(private dataService: DataService) { }
+    constructor(private dataService: DataService, private router: Router) { }
 
     ngOnInit() {
         this.loadUsers();    // загрузка данных при старте компонента  
+    }
+
+    navigateToClientInfoPage(user: User) {
+        this.router.navigate(
+            ['/userInfo'],
+            {
+                queryParams: { 'id': user.id }  
+            }
+        );
     }
 
     loadUsers() {

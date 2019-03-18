@@ -10,14 +10,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { DataService } from './data.service';
 import { User } from './models/user';
+import { Router } from '@angular/router';
 var AppClientPageComponent = /** @class */ (function () {
-    function AppClientPageComponent(dataService) {
+    function AppClientPageComponent(dataService, router) {
         this.dataService = dataService;
+        this.router = router;
         this.user = new User();
         this.tableMode = true; // табличный режим
     }
     AppClientPageComponent.prototype.ngOnInit = function () {
         this.loadUsers(); // загрузка данных при старте компонента  
+    };
+    AppClientPageComponent.prototype.navigateToClientInfoPage = function (user) {
+        this.router.navigate(['/userInfo'], {
+            queryParams: { 'id': user.id }
+        });
     };
     AppClientPageComponent.prototype.loadUsers = function () {
         var _this = this;
@@ -78,7 +85,7 @@ var AppClientPageComponent = /** @class */ (function () {
             templateUrl: './app.clientPageComponent.html',
             providers: [DataService]
         }),
-        __metadata("design:paramtypes", [DataService])
+        __metadata("design:paramtypes", [DataService, Router])
     ], AppClientPageComponent);
     return AppClientPageComponent;
 }());

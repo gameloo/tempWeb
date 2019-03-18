@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\app.clientInfoPageComponent.ts" />
     <None Remove="ClientApp\app\app.clientPageComponent.ts" />
     <None Remove="ClientApp\app\app.component.ts" />
     <None Remove="ClientApp\app\app.groupPageComponent.ts" />
@@ -24,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\app.clientInfoPageComponent.ts" />
     <TypeScriptCompile Include="ClientApp\app\app.clientPageComponent.ts" />
     <TypeScriptCompile Include="ClientApp\app\app.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\app.groupPageComponent.ts" />

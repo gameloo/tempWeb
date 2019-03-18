@@ -19,6 +19,9 @@ var DataService = /** @class */ (function () {
     DataService.prototype.getGroups = function () {
         return this.http.get(this.groupUrl);
     };
+    DataService.prototype.getGroup = function (id) {
+        return this.http.get(this.groupUrl + "/" + id);
+    };
     DataService.prototype.createGroup = function (group) {
         return this.http.post(this.groupUrl, group);
     };

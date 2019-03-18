@@ -21,10 +21,10 @@ namespace BankASP.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id_user}")]
         public IEnumerable<History> Get(int id_user)
         {
-            return db.Histories.Where(i => i.UserId == id_user);
+            return db.Histories.Where(i => i.UserId == id_user).ToList();
         }
     }
 }
