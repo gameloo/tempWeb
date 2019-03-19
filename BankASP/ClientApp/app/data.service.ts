@@ -17,6 +17,10 @@ export class DataService {
         return this.http.get(this.groupUrl);
     }
 
+    getGroupsAll() {
+        return this.http.get(`${this.groupUrl}/all`);
+    }
+
     getGroup(id: number) {
         return this.http.get(`${this.groupUrl}/${id}`);
     }

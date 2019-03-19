@@ -15,32 +15,23 @@ var AppClientInfoPageComponent = /** @class */ (function () {
         var _this = this;
         this.dataService = dataService;
         this.route = route;
-        this.isReady = false;
         this.routeSubscription = route.queryParams.subscribe(function (params) {
             _this.id = params['id'];
         });
     }
     AppClientInfoPageComponent.prototype.ngOnInit = function () {
-        this.loadHistory();
-    };
-    AppClientInfoPageComponent.prototype.loadHistory = function () {
         var _this = this;
         this.dataService.getHistory(this.id)
             .subscribe(function (data) {
             _this.histories = data;
-            _this.isReady = true;
+        });
+        this.dataService.getGroupsAll()
+            .subscribe(function (data) {
+            _this.groups = data;
         });
     };
     AppClientInfoPageComponent.prototype.getGroupName = function (id) {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.dataService
-                .getGroup(id) //useful if you need the data once and don't want to manually cancel the subscription again
-                .subscribe(function (data) {
-                console.log(data.name);
-                resolve(data.name);
-            });
-        });
+        return this.groups.find(function (i) { return i.id == id; }).name;
     };
     AppClientInfoPageComponent = __decorate([
         Component({

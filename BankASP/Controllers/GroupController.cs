@@ -34,6 +34,12 @@ namespace BankASP.Controllers
             return db.Groups.FirstOrDefault(i => i.Id == id);
         }
 
+        [HttpGet("all")]
+        public IEnumerable<Group> GetAll()
+        {
+            return db.Groups.ToList();
+        }
+
         [HttpPost]
         public IActionResult Post([FromBody]Group group)
         {

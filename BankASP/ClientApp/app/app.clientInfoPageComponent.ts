@@ -17,7 +17,7 @@ import { resolve } from 'path';
 export class AppClientInfoPageComponent implements OnInit {
     private id: number;
     histories: History[];
-    groups: Array<Group>;
+    groups: Group[];
 
     private routeSubscription: Subscription;
     constructor(private dataService: DataService, private route: ActivatedRoute) {
@@ -29,17 +29,17 @@ export class AppClientInfoPageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.loadHistory();
-    }
-
-    loadHistory() {
         this.dataService.getHistory(this.id)
             .subscribe((data: History[]) => {
                 this.histories = data;
             });
+        this.dataService.getGroupsAll()
+            .subscribe((data: Group[]) => {
+                this.groups = data;
+            });
     }
 
     getGroupName(id: number) {
-        console.error("group_name not set") 
+        return this.groups.find(i => i.id == id).name;
     }
 }
